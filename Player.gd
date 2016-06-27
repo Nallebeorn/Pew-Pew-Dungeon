@@ -36,13 +36,19 @@ func kill(message, killer):
 	get_node("AnimationPlayer").play("die")
 	get_node("/root/World/Label").set_message("===GAME OVER===").add_message(message).add_message("Randomly mash your keyboard in frustration to continue")
 	var file = File.new()
-	file.open("user://highscores.dat", file.READ_WRITE)
-	var hi_level = file.get_32()
-	var hi_score = file.get_64()
-	file.seek(0)
-	file.store_32(max(get_node("/root/Global").level, hi_level))
-	file.store_64(max(get_node("/root/Global").score, hi_score))
-	file.close()
+	if file.file_exists("user://highscores.dat"):
+		file.open("user://highscores.dat", file.READ_WRITE)
+		var hi_level = file.get_32()
+		var hi_score = file.get_64()
+		file.seek(0)
+		file.store_32(max(get_node("/root/Global").level, hi_level))
+		file.store_64(max(get_node("/root/Global").score, hi_score))
+		file.close()
+	else:
+		file.open("user://highscores.dat", file.WRITE)
+		file.store_32(get_node("/root/Global").level)
+		file.store_64(get_node("/root/Global").score)
+		file.close()
 	
 func _input(event):
 	if not dead:

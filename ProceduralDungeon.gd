@@ -72,7 +72,7 @@ func _ready():
 			file.close()
 			get_node("Label").add_message(str("Highscore: ", hi_level, "/", hi_score))
 		else:
-			get_node("Label").add_message("Welcome to the DUNGEON, newcomer!").add_message("WASD or ARROW KEYS to walk").add_message("LEFT-CLICK to shoot. RIGHT-CLICK or press SPACE to jump").add_message("Find the exit. Steal the loot. Kill the monsters.").add_message("Please do not die")
+			get_node("Label").add_message("Welcome to the PEW-PEW DUNGEON, newcomer!").add_message("WASD or ARROW KEYS to walk").add_message("LEFT-CLICK to shoot. RIGHT-CLICK or press SPACE to jump").add_message("Find the exit. Steal the loot. Kill the monsters.").add_message("You can quit the game with Ctrl-Q, but your progress in the current dungeon will then be lost!")
 	var wallScene = load("res://geometry/wall.scn")
 	var floorScene = load("res://geometry/floor.scn")
 	var ceilingScene = load("res://geometry/ceiling.scn")

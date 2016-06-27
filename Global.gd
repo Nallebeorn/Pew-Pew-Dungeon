@@ -18,6 +18,7 @@ func reset_stats():
 
 func _ready():
 	reset_stats()
+	set_process_input(true)
 
 func add_score(points):
 	score += points
@@ -33,6 +34,14 @@ func spawn_loot(pos):
 	var node = load("res://upgrades/"+loot+".scn").instance()
 	node.set_translation(pos)
 	get_node("/root/World").add_child(node)
+
+func _input(event):
+	if event.is_action("quit"):
+		get_tree().quit()
+	elif event.is_action("screenshot"):
+		var screen = get_viewport().get_screen_capture()
+		if not screen.empty():
+			screen.save_png(str("user://screenshot", OS.get_unix_time(), ".png"))
 
 func upgrade_stat(stat):
 	var msg = "You can feel no change..."
