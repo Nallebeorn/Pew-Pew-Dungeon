@@ -1,8 +1,9 @@
 This game uses the font *Vermin Vibes 2* by Andew McCluskey ("NAL"), available here: [http://www.dafont.com/vermin-vibes-2.font]
-See the link for licensing issues. I have the license to use that font, but you might not, so keep that in mind if you want to
+
+See the link for licensing. Note that while I have a license to use that font, you might not, so keep that in mind if you want to
 redistribute the game.
-All sound effects used in the game are either made by me and available under the MIT license like the rest of the game, or released
-in the Public Domain (under CC-0)
+
+All sound effects used in the game are either made by me and available under the MIT license like the rest of the game, or released in the Public Domain (under CC-0)
 
 Apart from those exceptions, the game+source is released under the following license:
 
