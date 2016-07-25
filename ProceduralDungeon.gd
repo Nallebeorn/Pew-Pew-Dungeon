@@ -57,7 +57,7 @@ func create_vertical_corridor(y1, y2, x, height):
 			grid[Vector2(x,y)] = height
 
 func _ready():
-	level = get_node("/root/Global").level
+	level = min(get_node("/root/Global").level, MAX_LEVEL)
 	get_node("Label").add_message(str("===Level ",level,"==="))
 	get_node("Score").update(level, get_node("/root/Global").score)
 	if level == 1:
