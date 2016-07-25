@@ -38,10 +38,14 @@ func spawn_loot(pos):
 func _input(event):
 	if event.is_action("quit"):
 		get_tree().quit()
-	elif event.is_action("screenshot"):
-		var screen = get_viewport().get_screen_capture()
-		if not screen.empty():
-			screen.save_png(str("user://screenshot", OS.get_unix_time(), ".png"))
+	elif event.is_action("screenshot") and event.is_pressed():
+		get_viewport().queue_screen_capture()
+		while true:
+			var screen = get_viewport().get_screen_capture()
+			if screen != null and not screen.empty():
+				screen.save_png(str("user://screenshot", OS.get_unix_time(), ".png"))
+				break
+			yield(get_tree(), "idle_frame")
 
 func upgrade_stat(stat):
 	var msg = "You can feel no change..."
