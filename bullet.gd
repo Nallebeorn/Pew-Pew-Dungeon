@@ -4,13 +4,11 @@ extends KinematicBody
 const SPEED = 80
 var dir = Vector3()
 var DAMAGE
-
-func _init():
-	add_collision_exception_with(get_node("../Player"))
-	set_fixed_process(true)
 	
 func _ready():
 	DAMAGE = get_node("/root/Global").player_damage
+	add_collision_exception_with(get_node("/root/World/Player"))
+	set_fixed_process(true)
 
 func _fixed_process(delta):
 	move(dir * SPEED * delta)
