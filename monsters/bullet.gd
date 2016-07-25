@@ -18,7 +18,7 @@ func _fixed_process(delta):
 		destroy()
 
 func destroy():
-	var explosion = load("res://explosion.scn").instance()
+	var explosion = load("res://explosion.tscn").instance()
 	explosion.set_translation(get_translation())
 	get_node("/root/World").add_child(explosion)
 	queue_free()

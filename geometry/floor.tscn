@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://shader_alpha.shd" type="Shader" id=1]
+[ext_resource path="res://blackandwhite.tex" type="Texture" id=2]
+[ext_resource path="res://geometry/floor.msh" type="Mesh" id=3]
+[ext_resource path="res://ColorEffect.tscn" type="PackedScene" id=4]
+[ext_resource path="res://geometry/floor.png" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 4.51622e-31
+shader/shader = ExtResource( 1 )
+shader_param/Color1 = Color( 0, 0, 0, 1 )
+shader_param/Color2 = Color( 1, 1, 1, 1 )
+shader_param/ExtraEmissive = null
+shader_param/Texture = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50 )
+layers = 1
+geometry/visible = true
+geometry/material_override = SubResource( 1 )
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 3 )
+mesh/skeleton = NodePath("..")
+material/0 = null
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+aabb = AABB( -50, 0, -50, 100, 0.1, 100 )
+
+[node name="ColorEffectComponent" parent="." instance=ExtResource( 4 )]
+
+texture = ExtResource( 5 )
+unshaded = false
+
+

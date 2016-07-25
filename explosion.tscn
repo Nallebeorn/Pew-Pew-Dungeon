@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://explosion.gd" type="Script" id=1]
+[ext_resource path="res://ring.png" type="Texture" id=2]
+[ext_resource path="res://ColorEffect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://justACircler.png" type="Texture" id=4]
+[ext_resource path="res://sounds/small_explosion.wav" type="Sample" id=5]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "Boom"
+length = 1.0
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/scale")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2 ), "transitions":FloatArray( 1, 4, 1 ), "update":0, "values":[ Vector3( 0, 0, 0 ), Vector3( 50, 50, 50 ), Vector3( 0, 0, 0 ) ] }
+
+[sub_resource type="SampleLibrary" id=2]
+
+samples/small_explosion = { "db":0.0, "pitch":1.0, "sample":ExtResource( 5 ) }
+
+[node name="Explosion" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 1 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = true
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+centered = true
+offset = Vector2( 0, 0 )
+flip_h = false
+flip_v = false
+modulate = Color( 1, 1, 1, 1 )
+opacity = 1.0
+pixel_size = 0.01
+axis = 2
+flags/transparent = true
+flags/shaded = false
+flags/alpha_cut = 0
+texture = ExtResource( 2 )
+vframes = 1
+hframes = 1
+frame = 0
+region = false
+region_rect = Rect2( 0, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3D"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Boom = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "Boom"
+
+[node name="ColorEffectComponent" parent="Sprite3D" instance=ExtResource( 3 )]
+
+texture = ExtResource( 4 )
+billboard = true
+unshaded = true
+
+[node name="SpatialSamplePlayer" type="SpatialSamplePlayer" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 200.0
+params/attenuation/distance_exp = 1.0
+params/emission_cone/degrees = 180.0
+params/emission_cone/attenuation_db = -6.0
+config/polyphony = 1
+config/samples = SubResource( 2 )
+
+[connection signal="finished" from="Sprite3D/AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
+
+

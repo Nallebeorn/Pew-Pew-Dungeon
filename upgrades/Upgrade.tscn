@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://upgrades/Upgrade.gd" type="Script" id=1]
+[ext_resource path="res://upgrades/damage.png" type="Texture" id=2]
+[ext_resource path="res://ColorEffect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sounds/upgrade.wav" type="Sample" id=4]
+
+[sub_resource type="SphereShape" id=1]
+
+radius = 2.0
+
+[sub_resource type="SampleLibrary" id=2]
+
+samples/upgrade = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+
+[node name="Upgrade" type="Area"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1.43796, 0, 0, 0, 1.43796, 0, 0, 0, 1.43796, 0, 6.09683, 0 )
+shapes/0/trigger = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision/layers = 1
+collision/mask = 1
+script/script = ExtResource( 1 )
+stat = null
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 25.564, 0, 0, 0, 25.564, 0, 0, 0, 25.564, 0, 6.09683, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = true
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+centered = true
+offset = Vector2( 0, 0 )
+flip_h = true
+flip_v = false
+modulate = Color( 1, 1, 1, 1 )
+opacity = 1.0
+pixel_size = 0.01
+axis = 2
+flags/transparent = true
+flags/shaded = false
+flags/alpha_cut = 0
+texture = ExtResource( 2 )
+vframes = 1
+hframes = 1
+frame = 0
+region = false
+region_rect = Rect2( 0, 0, 0, 0 )
+
+[node name="ColorEffectComponent" parent="Sprite3D" instance=ExtResource( 3 )]
+
+billboard = true
+unshaded = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1.43796, 0, 0, 0, 1.43796, 0, 0, 0, 1.43796, 0, 6.09683, 0 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="SamplePlayer" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 2 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[connection signal="body_enter" from="." to="." method="_on_Upgrade_body_enter"]
+
+

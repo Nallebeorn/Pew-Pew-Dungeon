@@ -74,7 +74,7 @@ func _fixed_process(delta):
 		shoot_timer -= delta
 	else:
 		if Input.is_action_pressed("shoot"):
-			var bullet = load("res://bullet.scn").instance()
+			var bullet = load("res://bullet.tscn").instance()
 			var screenPos = get_viewport().get_rect().size*.5
 			bullet.dir = get_node("Yaw/Camera").project_ray_normal(screenPos)
 			bullet.set_translation(get_node("Yaw/Camera").project_ray_origin(screenPos) + bullet.dir * GUN_TIP)

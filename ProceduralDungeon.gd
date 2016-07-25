@@ -73,10 +73,10 @@ func _ready():
 			get_node("Label").add_message(str("Highscore: ", hi_level, "/", hi_score))
 		else:
 			get_node("Label").add_message("Welcome to the PEW-PEW DUNGEON, newcomer!").add_message("WASD or ARROW KEYS to walk").add_message("LEFT-CLICK to shoot. RIGHT-CLICK or press SPACE to jump").add_message("Find the exit. Steal the loot. Kill the monsters.").add_message("You can quit the game with Ctrl-Q, but your progress in the current dungeon will then be lost!")
-	var wallScene = load("res://geometry/wall.scn")
-	var floorScene = load("res://geometry/floor.scn")
-	var ceilingScene = load("res://geometry/ceiling.scn")
-	var roomScene = load("res://geometry/room.scn")
+	var wallScene = load("res://geometry/wall.tscn")
+	var floorScene = load("res://geometry/floor.tscn")
+	var ceilingScene = load("res://geometry/ceiling.tscn")
+	var roomScene = load("res://geometry/room.tscn")
 	
 	get_node("Floor/CollisionShape").get_shape().set_extents(Vector3(SIZE * GRID_SIZE, 0.1, SIZE * GRID_SIZE))
 	get_node("Floor").translate(Vector3((SIZE * GRID_SIZE)/2, -0.1, (SIZE * GRID_SIZE)/2))
@@ -145,7 +145,7 @@ func _ready():
 				while monsters:
 					monster = monster_list[randi() % monster_list.size()]
 					if randf() <= MONSTER_PROBABILITY[monster][level-1]:
-						var node = load("res://monsters/"+monster+".scn").instance()
+						var node = load("res://monsters/"+monster+".tscn").instance()
 						node.set_translation(Vector3(rand_range(x+1, x+width-1), 0, rand_range(y+1, y+height-1)) * GRID_SIZE)
 						add_child(node)
 						monsters -= 1
@@ -156,7 +156,7 @@ func _ready():
 		
 			# LOOOOOT!!!! :D :D :D :D :D :D
 			if randf() <= TREASURE_PROBABILITY:
-				var treasure = load("res://upgrades/Safe.scn").instance()
+				var treasure = load("res://upgrades/Safe.tscn").instance()
 				treasure.set_translation(Vector3(rand_range(x+1, x+width-1), 0, rand_range(y+1, y+height-1)) * GRID_SIZE)
 				add_child(treasure)
 		
@@ -178,7 +178,7 @@ func _ready():
 	
 	# Create exit
 	var exit_room = rect_list[round(rand_range(1, rect_list.size()-1))]
-	var exit = load("res://exit.scn").instance()
+	var exit = load("res://exit.tscn").instance()
 	exit.set_translation(Vector3(exit_room.pos.x + .5*exit_room.size.x, 0, exit_room.pos.y + .5*exit_room.size.y) * GRID_SIZE)
 	add_child(exit)
 	

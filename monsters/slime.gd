@@ -40,7 +40,7 @@ func damage(amount):
 	hp -= amount
 	if hp <= 0:
 		if size <= 1:
-			var explosion = load("res://explosion.scn").instance()
+			var explosion = load("res://explosion.tscn").instance()
 			explosion.set_translation(get_translation())
 			get_node("..").add_child(explosion)
 			queue_free()
@@ -49,13 +49,13 @@ func damage(amount):
 				get_node("/root/Global").spawn_loot(get_translation())
 			
 		else:
-			var slice = load("res://monsters/slime.scn").instance()
+			var slice = load("res://monsters/slime.tscn").instance()
 			slice.size = size - 1
 			slice.set_translation(get_translation() + Vector3(randf()*10, 0, randf()*10))
 			get_node("..").add_child(slice)
 			slice.walk_to = walk_to
 			slice.remember = MEMORY # This is mostly so they walk out if they're stuck in a wall
-			slice = load("res://monsters/slime.scn").instance()
+			slice = load("res://monsters/slime.tscn").instance()
 			slice.size = size - 1
 			slice.set_translation(get_translation() + Vector3(randf()*10, 0, randf()*10))
 			get_node("..").add_child(slice)

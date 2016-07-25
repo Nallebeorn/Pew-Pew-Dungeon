@@ -31,7 +31,7 @@ func _process(delta):
 func damage(amount):
 	hp -= amount
 	if hp <= 0:
-		var explosion = load("res://explosion.scn").instance()
+		var explosion = load("res://explosion.tscn").instance()
 		explosion.set_translation(get_translation())
 		get_node("..").add_child(explosion)
 		sound.play("die")

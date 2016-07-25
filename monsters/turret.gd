@@ -15,7 +15,7 @@ func _process(delta):
 func damage(amount):
 	hp -= amount
 	if hp <= 0:
-		var explosion = load("res://explosion.scn").instance()
+		var explosion = load("res://explosion.tscn").instance()
 		explosion.set_translation(get_translation())
 		get_node("..").add_child(explosion)
 		sound.play("die")
@@ -27,7 +27,7 @@ func damage(amount):
 func _on_Timer_timeout():
 	get_node("Timer").start()
 	print("BAMBAM")
-	var bullet = preload("res://monsters/bullet.scn").instance()
+	var bullet = preload("res://monsters/bullet.tscn").instance()
 	bullet.set_translation(get_node("Gun").get_global_transform().origin)
 	bullet.shooter = self
 	get_node("/root/World").add_child(bullet)

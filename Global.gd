@@ -31,7 +31,7 @@ func spawn_loot(pos):
 	else:
 		var upgrades = ["Damage", "Speed", "Gun"]
 		loot = upgrades[round(rand_range(0, upgrades.size()-1))]
-	var node = load("res://upgrades/"+loot+".scn").instance()
+	var node = load("res://upgrades/"+loot+".tscn").instance()
 	node.set_translation(pos)
 	get_node("/root/World").add_child(node)
 
