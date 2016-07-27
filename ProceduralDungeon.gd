@@ -57,9 +57,9 @@ func create_vertical_corridor(y1, y2, x, height):
 			grid[Vector2(x,y)] = height
 
 func _ready():
-	level = min(get_node("/root/Global").level, MAX_LEVEL)
+	level = min(Global.level, MAX_LEVEL)
 	get_node("Label").add_message(str("===Level ",level,"==="))
-	get_node("Score").update(level, get_node("/root/Global").score)
+	get_node("Score").update(level, Global.score)
 	if level == 1:
 		var time = OS.get_unix_time()
 		seed(time) # I don't use randomize() cuz I wanna be able to view the seed for debugging purposes

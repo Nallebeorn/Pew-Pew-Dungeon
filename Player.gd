@@ -41,13 +41,13 @@ func kill(message, killer):
 		var hi_level = file.get_32()
 		var hi_score = file.get_64()
 		file.seek(0)
-		file.store_32(max(get_node("/root/Global").level, hi_level))
-		file.store_64(max(get_node("/root/Global").score, hi_score))
+		file.store_32(max(Global.level, hi_level))
+		file.store_64(max(Global.score, hi_score))
 		file.close()
 	else:
 		file.open("user://highscores.dat", file.WRITE)
-		file.store_32(get_node("/root/Global").level)
-		file.store_64(get_node("/root/Global").score)
+		file.store_32(Global.level)
+		file.store_64(Global.score)
 		file.close()
 	
 func _input(event):
@@ -65,7 +65,7 @@ func _input(event):
 			get_tree().set_input_as_handled()
 	elif not get_node("AnimationPlayer").is_playing():
 		if (event.type == InputEvent.KEY or event.type == InputEvent.MOUSE_BUTTON) and event.pressed:
-			get_node("/root/Global").reset_stats()
+			Global.reset_stats()
 			get_tree().reload_current_scene()
 
 func _fixed_process(delta):
@@ -93,9 +93,8 @@ func _ready():
 	update_stats()
 
 func update_stats():
-	var g = get_node("/root/Global")
-	WALK_MAXSPEED = g.player_speed
-	SHOOT_TIMEOUT = g.player_shoot_cooldown
+	WALK_MAXSPEED = Global.player_speed
+	SHOOT_TIMEOUT = Global.player_shoot_cooldown
 	
 func _enter_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
